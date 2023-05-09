@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Deezer</string>
+    <string name="text">text</string>
+    <string name="imageview">imageview</string>
+    <string name="toolbarlayout">toolbarLayout</string>
+    <string name="back_arrow_image">back_arrow_image</string>
+    <string name="searchimage">search_image</string>
+    <string name="search">Search</string>
+</resources>
