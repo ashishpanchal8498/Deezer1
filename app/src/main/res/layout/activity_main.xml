@@ -35,16 +35,18 @@
             android:src="@drawable/ic_search_image"
             tools:ignore="TouchTargetSizeCheck" />
 
-        <EditText
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="@string/search"
+            app:searchIcon="@null"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/search"
             android:importantForAutofill="no"
             android:inputType="text"
             android:layout_marginStart="20dp"
-            android:textColorHint="#524E51"
             android:textColor="#524E51"
             android:textSize="14sp" />
 

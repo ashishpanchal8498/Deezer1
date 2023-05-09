@@ -1,69 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_main_music_record"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="#262C3A">
+    android:paddingHorizontal="13dp"
+    android:background="#262C3A"
+    android:orientation="horizontal">
 
-        <com.google.android.material.imageview.ShapeableImageView
+<RelativeLayout
+    android:id="@+id/relativeProfile"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="13dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
             android:id="@+id/albumImageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="10dp"
-            android:contentDescription="@string/imageview"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_centerInParent="true"
             android:scaleType="centerCrop"
             android:src="@drawable/profile_image"
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-            tools:ignore="ImageContrastCheck" />
+            android:contentDescription="@string/albumimageview" />
 
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="6dp"
-            android:text="@string/text"
-            android:textColor="@color/white"
-            android:layout_toEndOf="@id/albumImageView"
-            android:textSize="10pt" />
+</RelativeLayout>
 
-        <TextView
-            android:id="@+id/artistTextView"
-            android:layout_width="240dp"
+        <LinearLayout
+            android:id="@+id/ll_desc"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/text"
-            android:textColor="#93969D"
-            android:layout_toEndOf="@id/albumImageView"
-            android:layout_below="@id/titleTextView"
-            android:textSize="8pt" />
+            android:layout_marginStart="6.50dp"
+            android:layout_marginEnd="6.50dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/relativeProfile"
+            app:layout_constraintStart_toEndOf="@id/relativeProfile"
+            app:layout_constraintTop_toTopOf="@id/relativeProfile">
+
+                <TextView
+                    android:id="@+id/titleTextView"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="6.50dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/text"
+                    android:textColor="@color/white"
+                    android:textSize="15.6sp" />
+
+                <TextView
+                    android:id="@+id/artistTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6.50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="2.6dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/text"
+                    android:textColor="#AAAAAA"
+                    android:textSize="13sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/icplay"
+            style="@style/GalleryIcon"
+            android:src="@drawable/ic_play"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#262C3A"
+            app:tint="#2AD4D5"
+            android:clickable="true"
+            android:contentDescription="@string/icplay"/>
+
+        <ImageView
+            android:id="@+id/icpause"
+            style="@style/GalleryIcon"
+            android:src="@drawable/ic_pause"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="#262C3A"
+            app:tint="#2AD4D5"
+            android:contentDescription="@string/icplay"/>
 
         <View
             android:id="@+id/view1"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="5dp"
             android:background="#2E3444"
-            android:layout_toEndOf="@id/albumImageView"
-            android:layout_below="@id/artistTextView"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/relativeProfile" />
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:clickable="true"
-            android:layout_width="40dp"
-            android:layout_height="46dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_toEndOf="@id/titleTextView"
-            android:background="#262C3A"
-            android:src="@drawable/ic_outline_play_arrow"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,4 +4,10 @@
             <item name="cornerFamily">rounded</item>
             <item name="cornerSize">50%</item>
         </style>
+
+    <style name="GalleryIcon">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:padding">5dp</item>
+    </style>
 </resources>

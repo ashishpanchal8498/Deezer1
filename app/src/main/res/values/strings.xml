@@ -6,4 +6,6 @@
     <string name="back_arrow_image">back_arrow_image</string>
     <string name="searchimage">search_image</string>
     <string name="search">Search</string>
+    <string name="albumimageview">albumImageView</string>
+    <string name="icplay">icplay</string>
 </resources>
