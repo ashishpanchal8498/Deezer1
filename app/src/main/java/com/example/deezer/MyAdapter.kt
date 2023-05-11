@@ -2,7 +2,7 @@ package com.example.deezer
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.media.AudioManager
+import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
@@ -16,17 +16,19 @@ class MyAdapter(private val context: Context, private val searchItems: List<Sear
     RecyclerView.Adapter<MyAdapter.SearchViewHolder>() {
     private var filteredList: List<SearchItem> = searchItems
     var mediaPlayer: MediaPlayer? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return SearchViewHolder(view)
     }
 
-
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(filteredList[position],context)
+        holder.bind(filteredList[position])
     }
 
     override fun getItemCount(): Int = filteredList.size
+
+    @SuppressLint("NotifyDataSetChanged")
     fun search(query: String) {
         filteredList = if (query.isNotEmpty()) {
             searchItems.filter { it.title.contains(query, ignoreCase = true) }
@@ -35,34 +37,47 @@ class MyAdapter(private val context: Context, private val searchItems: List<Sear
         }
         notifyDataSetChanged()
     }
-        inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    fun releaseMediaPlayer() {
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+    private var buttonPlayer: ImageView? = null
+
+    inner class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
         private val artistTextView: TextView = itemView.findViewById(R.id.artistTextView)
         private val albumImageView: ImageView = itemView.findViewById(R.id.albumImageView)
         private val icplay: ImageView = itemView.findViewById(R.id.icplay)
+        private val icpause: ImageView = itemView.findViewById(R.id.icpause)
 
         @SuppressLint("UseCompatLoadingForDrawables")
-        fun bind(searchItem: SearchItem, context: Context) {
+        fun bind(searchItem: SearchItem) {
             titleTextView.text = searchItem.title
             artistTextView.text = searchItem.artist.name
-            Glide.with(itemView)
-                .load(searchItem.album.cover)
-                .into(albumImageView)
+            Glide.with(itemView).load(searchItem.album.cover).into(albumImageView)
 
-            mediaPlayer = MediaPlayer()
-            mediaPlayer?.setAudioStreamType(AudioManager.STREAM_MUSIC)
-            mediaPlayer?.setDataSource(searchItem.preview)
-            mediaPlayer?.prepare()
+            icplay.setOnClickListener{
+                releaseMediaPlayer()
 
-            icplay.setOnClickListener {
-                if (mediaPlayer?.isPlaying == true) {
-                    mediaPlayer?.pause()
+                buttonPlayer?.setImageResource(R.drawable.ic_play)
+                buttonPlayer=icplay
+            mediaPlayer = MediaPlayer().apply {
+                setAudioAttributes(
+                    AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build()
+                )
+                setDataSource(searchItem.preview)
+                prepareAsync()
+                icplay.setImageResource(R.drawable.ic_pause)
+                setOnPreparedListener {
+                    start()
+                }
+                setOnCompletionListener {
                     icplay.setImageResource(R.drawable.ic_play)
-                } else {
-                    mediaPlayer?.start()
-                    icplay.setImageResource(R.drawable.ic_pause)
                 }
             }
+        }
         }
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -41,14 +40,12 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:gravity="center_vertical"
-            app:searchIcon="@null"
-            app:iconifiedByDefault="false"
-            app:queryHint="@string/search"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:layout_marginStart="20dp"
             android:textColor="#524E51"
-            android:textSize="14sp" />
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/search"
+            app:searchIcon="@null" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -56,9 +53,9 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarLayout"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

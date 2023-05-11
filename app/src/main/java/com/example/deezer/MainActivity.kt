@@ -1,8 +1,10 @@
 package com.example.deezer
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,11 +16,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var rvmain: RecyclerView
     private lateinit var myAdapter: MyAdapter
-    private lateinit var searchView: SearchView
     private var searchItems: MutableList<SearchItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,20 +30,22 @@ class MainActivity : AppCompatActivity() {
         rvmain.layoutManager = LinearLayoutManager(this)
         rvmain.adapter = myAdapter
 
-        performSearch("alesso")
+        performSearch("arijit")
 
     val searchView = findViewById<SearchView>(R.id.searchView)
+        val editText = searchView.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+        editText.setTextColor(Color.WHITE)
     searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String): Boolean {
             searchView.clearFocus()
-            myAdapter.search(query)
+            performSearch(query)
             return false
         }
 
         override fun onQueryTextChange(newText: String): Boolean {
-            performSearch(newText)
             return false
         }
+
     })
     }
 
