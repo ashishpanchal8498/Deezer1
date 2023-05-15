@@ -3,7 +3,8 @@ package com.example.deezer
 
 data class SearchResult(
     val data: List<SearchItem>,
-    val total: Int
+    val total: Int,
+    val next: String?=null
 )
 
 data class SearchItem(
@@ -14,6 +15,7 @@ data class SearchItem(
     val preview: String,
     val artist: SearchArtist,
     val album: SearchAlbum,
+    val response: SearchResponse,
     val type: String
 )
 
